@@ -2,6 +2,7 @@ import Card from "./Card";
 import { useState } from "react";
 
 const Gameboard = ({ selectedLeague, level }) => {
+
     const getClubs = () => {
 
         const getRandomID = () => {
@@ -49,8 +50,11 @@ const Gameboard = ({ selectedLeague, level }) => {
 
     const clickedItems = [];
 
-    const updateClicked = (id) => {
-        clickedItems.includes(id) ? console.log("Restart game!") : clickedItems.push(id);
+    const reactToClick = (id) => {
+        clickedItems.includes(id) ?
+            console.log("Restart game!") :
+/*             gameScores.upgradeScore();
+ */        clickedItems.push(id);
 
         reArrangeClubs(); //TODO: This should only happen if clicked card isn't in clickedItems
     }
@@ -58,7 +62,7 @@ const Gameboard = ({ selectedLeague, level }) => {
     return (
         /* TODO: Grid size depends on current level. */
         <div className="col-start-3 col-span-8 h-screen p-2 bg-blue-50 grid grid-cols-4 grid-rows-2 gap-2 justify-items-stretch items-stretch">
-            {clubs.map(club => <Card club={club} key={club.id} onSelection={updateClicked} />)}
+            {clubs.map(club => <Card club={club} key={club.id} onSelection={reactToClick} />)}
         </div>
     )
 }
