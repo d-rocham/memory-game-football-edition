@@ -10,7 +10,7 @@ const Aside = () => {
                 <Button content={"Change League"}></Button>
                 <Button content={"Restart"}></Button>
             </div>
-            <Scoreboard currentScore={5} bestScore={10}></Scoreboard>
+            <Scoreboard></Scoreboard>
         </div>
     )
 }

@@ -1,7 +1,12 @@
 import Card from "./Card";
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { ScoreContext } from "../contexts/ScoreContext";
+
+let clickedItems = [];
 
 const Gameboard = ({ selectedLeague, level }) => {
+
+    const { updateCurrentScore, resetCurrentScore } = useContext(ScoreContext);
 
     const getClubs = () => {
 
@@ -48,15 +53,18 @@ const Gameboard = ({ selectedLeague, level }) => {
         }
     }
 
-    const clickedItems = [];
 
     const reactToClick = (id) => {
-        clickedItems.includes(id) ?
-            console.log("Restart game!") :
-/*             gameScores.upgradeScore();
- */        clickedItems.push(id);
+        if (clickedItems.includes(id)) {
+            resetCurrentScore();
+            clickedItems.length = 0;
+        }
 
-        reArrangeClubs(); //TODO: This should only happen if clicked card isn't in clickedItems
+        else {
+            clickedItems.push(id)
+            updateCurrentScore();
+            reArrangeClubs(); // //TODO: This should only happen if clicked card isn't in clickedItems
+        }
     }
 
     return (
